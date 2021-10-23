@@ -16,7 +16,7 @@ else:
 # clone each repo
 for i in repos:
     r_name = i.split("/")[-1]
-    subprocess.run(['git', 'clone', f'https://earthengine.googlesource.com/{i}',f"{REPO_FOLDER}/{r_name}"],shell=True)
+    subprocess.Popen(['git', 'clone', f'https://earthengine.googlesource.com/{i}',f"{REPO_FOLDER}/{r_name}"]).communicate()
 
 ee_folders = os.listdir(REPO_FOLDER)
 print(ee_folders,'ee folders')
@@ -26,15 +26,16 @@ print(ee_folders)
 for repo in ee_folders:
     os.chdir(f'{working_path}\git_tests\{repo}')
 
-    logs = subprocess.run(['git','log',"--author=JohnJdilger",'--pretty=format:"%ad"', '--date=format:"%Y-%m-%d"'],capture_output=True, text=True).stdout.splitlines()
-    logs2 = subprocess.run(['git','log',"--author=jdilger",'--pretty=format:"%ad"', '--date=format:"%Y-%m-%d"'],capture_output=True, text=True).stdout.splitlines()
+    stdout, stderr = subprocess.Popen(['git','log',"--author=JohnJdilger",'--pretty=format:"%ad"', '--date=format:"%Y-%m-%d"'],text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+    logs = stdout.splitlines()
+    #logs2 = subprocess.run(['git','log',"--author=jdilger",'--pretty=format:"%ad"', '--date=format:"%Y-%m-%d"'],capture_output=True, text=True).stdout.splitlines()
 
     # clean up subprocess junk
     clean_logs = [i.replace('"',"") for i in logs]
-    clean_logs2 = [i.replace('"',"") for i in logs2]
+#     clean_logs2 = [i.replace('"',"") for i in logs2]
     
     # add to log counter
-    tmp = clean_logs + clean_logs2
+    tmp = clean_logs #+ clean_logs2
     all_logs.extend(tmp)
 
 log_dict = {i:all_logs.count(i) for i in all_logs}
