@@ -19,6 +19,7 @@ for i in repos:
     subprocess.run(['git', 'clone', f'https://earthengine.googlesource.com/{i}',f"{REPO_FOLDER}/{r_name}"],shell=True)
 
 ee_folders = os.listdir(REPO_FOLDER)
+print(ee_folders,'ee folders')
 all_logs = []
 print(ee_folders)
 # iterate through each repo and capture commits
