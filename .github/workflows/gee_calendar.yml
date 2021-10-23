@@ -25,7 +25,15 @@ jobs:
       - uses: actions/setup-python@v2
         with:
             python-version: '3.8' # Version range or exact version of a Python version to use, using SemVer's version range syntax
-
+      - name: auth ee git
+        run: eval 'set +o history' 2>/dev/null || setopt HIST_IGNORE_SPACE 2>/dev/null
+            touch ~/.gitcookies
+            chmod 0600 ~/.gitcookies
+            git config --global http.cookiefile ~/.gitcookies
+            tr , \\t <<\__END__ >>~/.gitcookies
+            earthengine.googlesource.com,FALSE,/,TRUE,2147483647,o,git-JohnJdilger.gmail.com=${{ secrets.GEE_GIT_KEY }}
+            __END__
+            eval 'set -o history' 2>/dev/null || unsetopt HIST_IGNORE_SPACE 2>/dev/null
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: python hello.py
