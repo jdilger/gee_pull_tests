@@ -40,6 +40,7 @@ jobs:
             earthengine.googlesource.com,FALSE,/,TRUE,2147483647,o,git-JohnJdilger.gmail.com=${{ secrets.GEE_GIT_KEY }}
             __END__
             eval 'set -o history' 2>/dev/null || unsetopt HIST_IGNORE_SPACE 2>/dev/null
+            echo "multi line run works"
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: python hello.py
