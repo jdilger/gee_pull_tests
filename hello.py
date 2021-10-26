@@ -24,7 +24,7 @@ all_logs = []
 print(ee_folders)
 # iterate through each repo and capture commits
 for repo in ee_folders:
-    os.chdir(f'{working_path}\git_tests\{repo}')
+    os.chdir(f'{working_path}/git_tests/{repo}')
 
     stdout, stderr = subprocess.Popen(['git','log',"--author=JohnJdilger",'--pretty=format:"%ad"', '--date=format:"%Y-%m-%d"'],text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
     logs = stdout.splitlines()
