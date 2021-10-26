@@ -32,7 +32,8 @@ jobs:
         run: git config --global user.email "johnjdilger@gmail.com"
       
       - name: auth ee git
-        run: eval 'set +o history' 2>/dev/null || setopt HIST_IGNORE_SPACE 2>/dev/null
+        run: | 
+            eval 'set +o history' 2>/dev/null || setopt HIST_IGNORE_SPACE 2>/dev/null
             touch ~/.gitcookies
             chmod 0600 ~/.gitcookies
             git config --global http.cookiefile ~/.gitcookies
@@ -40,7 +41,7 @@ jobs:
             earthengine.googlesource.com,FALSE,/,TRUE,2147483647,o,git-JohnJdilger.gmail.com=${{ secrets.GEE_GIT_KEY }}
             __END__
             eval 'set -o history' 2>/dev/null || unsetopt HIST_IGNORE_SPACE 2>/dev/null
-            echo "multi line run works"
+            echo "multi line run works with Literal Block Scalar"
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: python hello.py
