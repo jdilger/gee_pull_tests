@@ -7,7 +7,8 @@ REPO_FOLDER = 'git_repos'
 repos = ['users/TEST/utils']
 working_path = os.getcwd()
 repos_path = os.path.join(working_path, REPO_FOLDER)
-
+print('working path',working_path)
+print('repos_path',repos_path)
 if os.path.exists(repos_path):
     pass
 else:
@@ -25,7 +26,7 @@ print(ee_folders)
 # iterate through each repo and capture commits
 for repo in ee_folders:
     os.chdir(f'{working_path}/git_tests/{repo}')
-
+    print('loop cwd', os.getcwd())
     stdout, stderr = subprocess.Popen(['git','log',"--author=JohnJdilger",'--pretty=format:"%ad"', '--date=format:"%Y-%m-%d"'],text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
     logs = stdout.splitlines()
     #logs2 = subprocess.run(['git','log',"--author=jdilger",'--pretty=format:"%ad"', '--date=format:"%Y-%m-%d"'],capture_output=True, text=True).stdout.splitlines()
