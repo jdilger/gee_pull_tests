@@ -60,8 +60,9 @@ jobs:
       - name: make new page
         run: sudo python test.py
         
-      - name: commit files
+      - name: add and commit files
         run: |
+          git add test.html
           git commit -m "changes" -a
           
       - name: push
