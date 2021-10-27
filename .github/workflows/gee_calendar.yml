@@ -52,7 +52,7 @@ jobs:
         run: git clone https://github.com/jdilger/contributions-graph.git
       
       - name: install requirements
-        run: pip install /contributions-graph/requirements.txt
+        run: pip install ./contributions-graph/requirements.txt
         
       - name: make new page
         run: python test.py
