@@ -49,7 +49,7 @@ jobs:
         run: python hello.py
         
       - name: try cloning w run
-        run: git clonehttps://github.com/jdilger/contributions-graph.git
+        run: git clone https://github.com/jdilger/contributions-graph.git
       
       - name: install requirements
         run: pip install contributions-graph/requirements.txt
@@ -57,3 +57,12 @@ jobs:
       - name: make new page
         run: python test.py
         
+      - name: commit files
+        run: |
+          git commit -m "changes" -a
+          
+      - name: push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
