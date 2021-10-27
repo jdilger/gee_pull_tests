@@ -52,7 +52,7 @@ jobs:
         run: |
           git clone https://github.com/jdilger/contributions-graph.git
           cd contributions-graph
-          $ echo $PWD
+          echo $PWD
           
       - name: install requirements
         run: pip install -r contributions-graph/requirements.txt
