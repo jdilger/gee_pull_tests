@@ -58,7 +58,7 @@ jobs:
         run: pip install -r contributions-graph/requirements.txt
         
       - name: make new page
-        run: python test.py
+        run: sudo python test.py
         
       - name: commit files
         run: |
